@@ -27,34 +27,36 @@ function chooseRecipe(recipe) {
         option += `<option value="${item.id}">${item.name}</option>`;
     });
     $('#recipe').append(option);
+    $('#css').hide();
 }
 
-function eachRecipe(id) { 
+function eachRecipe(id) {
     allData.forEach(item => {
         if (item.id == id) {
             var step = item.instructions;
             var cutStep = step.split("<step>");
-             // showScutSteptep
+            // showScutSteptep
             result = "";
-            for(var i = 1;i<cutStep.length;i++){
+            for (var i = 1; i < cutStep.length; i++) {
                 result += `
                 <p class="text-primary">Step ${i}</p>
                 <p>${cutStep[i]}</p>
             `;
-            $("#instruction_project").html(result);
-            }   
+                $("#instruction_project").html(result);
+                $('#css').show();
+            }
 
             // showRecipe
             showRecipe(item.name, item.iconUrl, item.nbGuests);
 
             // showIngredient
-            showIngredient(item.ingredients);  
+            showIngredient(item.ingredients);
         }
     });
 }
 
 // showRecipe
-function showRecipe(name, img) {
+function showRecipe(name, img, nbGuests) {
     var result = "";
     result += `
     <div class="row">
@@ -73,12 +75,12 @@ function showRecipe(name, img) {
         <div class="col-4">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <button class="btn btn-primary" type="button" id="minus">&minus;</button>
+            <button type="button" id="minus">&minus;</button>
         </div>
-        <input type="number" class="form-control text-center" value="0" disabled id="member_project" max="15"
+        <input type="number" class="form-control text-center" value="${nbGuests}" disabled id="member_project" max="15"
             min="0">
         <div class="input-group-append">
-            <button class="btn btn-success" type="button" id="add">&#x2b;</button>
+            <button type="button" id="add">&#x2b;</button>
         </div>
         </div>
         <div class="col-2"></div>
@@ -98,6 +100,17 @@ function showRecipe(name, img) {
     </div>
     `;
     $('#recipe_project').html(result);
+
+    // function click on icon plus
+    $("#add").on('click', function () {
+        var num = parseInt($("#member_project").val());
+        add(num);
+    });
+    // function click on icon minus
+    $("#minus").on('click', function () {
+        var num = parseInt($("#member_project").val());
+        minus(num);
+    });
 }
 
 // get ingrediant
@@ -116,41 +129,20 @@ function showIngredient(ing) {
     $('#ingradiants_project').html(ingredient);
 }
 
-//  // get number of person 
-//  function numberOfPerson(Guests) {
-//     const{nbGuests} = Guests;
-//     var person = "";
-//     person += `
-//     <div class="col-2 mb-3"></div>
-//     <div class="col-4">
-//         <h4>Number of Person</h4>
-//     </div>
-//     <div class="col-4">
-//         <div class="input-group">
-//             <div class="input-group-prepend">
-//                 <button id="minus" type="button"
-//                     class="btn btn-primary">&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp</button>
-//             </div>
-//             <input type="text" id="input" style="width:115px" class="text-center" value="${nbGuests}" disabled>
-//             <div class="input-group-prepend">
-//                 <button type="button" id="sum"
-//                     class="btn btn-success">&nbsp&nbsp&nbsp&nbsp+&nbsp&nbsp&nbsp&nbsp</button>
-//             </div>
-//         </div>
-//     </div>
-//     <div class="col-2"></div><br><br><br>
-// `;
-// // diplay number of person in value input
-// $("#people").html(person);
 
-// // function click on icon sum
-// $("#sum").on('click', function () {
-//     var number = parseInt($("#input").val());
-//     sum(number);
-// });
-// // function click on icon minus
-// $("#minus").on('click', function () {
-//     var number = parseInt($("#input").val());
-//     minus(number);
-// });
-// }
+// increase value when click on icon sum
+function add(num) {
+    var numAdd = parseInt(num) +1;
+    if(numAdd <= 15) {
+        $("#member_project").val(numAdd);
+        // getGuests($("#member_project").val());
+    }
+}
+// decrease value when click on icon minus
+function minus(num) {
+    var minus = parseInt(num)-1;
+    if(minus >= 1) {
+        $("#member_project").val(minus);
+        // getGuests($("#member_project").val());
+    }
+}
