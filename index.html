@@ -10,14 +10,8 @@
 </head>
 <style>
     body {
-        background-image: url(vg1.jpg);
-    }
-
-    .ruler {
-        border-left: 1px solid blue;
-        height: 45%;
-        position: absolute;
-        left: 50%;
+        background-image: url(pink.jpg);
+        background-size: cover;
     }
 </style>
 
@@ -37,36 +31,38 @@
         </div>
 
         <div class="container mt-5">
-          <div class="row">
-            <div class="col-6" id="recipes">
+            <div class="row">
+                <div class="col-6" id="recipes">
 
-            </div>
-            <div class="col-6">
-                <div class="input-group mb-3" id="action">
-                    <div class="input-group-prepend">
-                        <button type="button" id="minus">&minus;</button>
-                    </div>
-                    <input type="number" class="form-control text-center"  disabled
-                        id="member_project" max="15" min="0">
-                    <div class="input-group-append">
-                        <button type="button" id="add">&#x2b;</button>
+                </div>
+                <div class="col-3">
+                    <h5 style="color: rgb(128, 104, 120)" class="text-center" id="num">Number of person</h5>
+                    <div class="input-group mb-3" id="action">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-success" id="minus">&minus;</button>
+                        </div>
+                        <input type="number" class="form-control text-center" disabled id="member_project" value="1">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-success" id="add">&#x2b;</button>
+                        </div>
                     </div>
                 </div>
+                <div class="col-3"></div>
             </div>
-          </div>
         </div>
 
-        <div class="ruler" id="css"></div>
+        <div class="card shadow" style="border: 5px solid pink" id="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <table class="table table-borderless" id="ingradiants_project"></table>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-borderless" id="instruction_project"></table>
+                    </div>
 
-        <div class="row">
-
-            <div class="col-6">
-                <table class="table table-borderless" id="ingradiants_project"></table>
+                </div>
             </div>
-            <div class="col-6">
-                <table class="table table-borderless" id="instruction_project"></table>
-            </div>
-
         </div>
     </div>
 

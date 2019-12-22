@@ -46,9 +46,10 @@ function chooseRecipe(recipe) {
         option += `<option value="${item.id}">${item.name}</option>`;
     });
     $('#recipe').append(option);
-    $('#css').hide();
 }
 $('#action').hide();
+$('#num').hide();
+$('#card').hide();
 
 // function for loop data from array variable
 var oldGuests;
@@ -56,24 +57,31 @@ function eachRecipe(id) {
     allData.forEach(item => {
         if (item.id == id) {
             recipeimage(item.name,item.iconUrl);
+
             //step
             getStep(item.instructions);
+
             // showIngredient
             showIngredient(item.ingredients);
             $('#action').show();
             $('#member_project').val(item.nbGuests);
+
+            // oldGuest
             oldGuests = $('#member_project').val();
-            
         }
     });
+    $('#num').show();
 }
 
+// updateRecipe
 function updateRecipe(seclect,member) {
     allData.forEach(item => {
         if (item.id == seclect) {
             recipeimage(item.name,item.iconUrl);
+
             //step
             getStep(item.instructions);
+
             // showIngredient
             updateIngredient(item.ingredients,member);
             $('#action').show();
@@ -87,8 +95,7 @@ function recipeimage(name, image){
     var recipe = "";
     recipe += `
     ${name}
-    <img src="${image}" width = "100">
-  
+    <img src="${image}" width = "100" class = "rounded-circle">
     `;
     $('#recipes').html(recipe);
 }
@@ -104,7 +111,6 @@ function getStep(step) {
         <p>${cutStep[i]}</p>
     `;
         $("#instruction_project").html(result);
-        $('#css').show();
     }
 }
 
@@ -113,24 +119,28 @@ function showIngredient(ing) {
     var ingredient = "";
     ing.forEach(item => {
         ingredient += `
+        <table class="striped">
         <tr>
-            <td><img src="${item.iconUrl}" width="25" class="img-fluid"></td>
+            <td><img src="${item.iconUrl}" width="50" class ="rounded-circle"></td>
             <td>${item.quantity}</td>
             <td>${item.unit[0]}</td>
             <td>${item.name}</td>
         </tr>
+        </table>
         `;
     });
     $('#ingradiants_project').html(ingredient);
+    $('#card').show();
 }
 
+// updateIngredient
 function updateIngredient(ing,member) {
     var ingredient = "";
     ing.forEach(item => {
-        var update = item.quantity * parseInt(member) /oldGuests;
+        var update = item.quantity * parseInt(member) / oldGuests;
         ingredient += `
         <tr>
-            <td><img src="${item.iconUrl}" width="25" class="img-fluid"></td>
+            <td><img src="${item.iconUrl}" width="50" class ="rounded-circle"></td>
             <td>${update}</td>
             <td>${item.unit[0]}</td>
             <td>${item.name}</td>
