@@ -9,14 +9,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <style>
+    body {
+        background-image: url(vg1.jpg);
+    }
+
     .ruler {
-        border-left: 2px solid blue;
+        border-left: 1px solid blue;
         height: 45%;
         position: absolute;
         left: 50%;
     }
-    
 </style>
+
 <body>
     <div class="container mt-5">
         <div class="row">
@@ -29,29 +33,43 @@
                 </select>
                 <br>
                 <div class="col-4"></div>
-            </div>   
+            </div>
         </div>
-        
+
         <div class="container mt-5">
-            <div  id="recipe_project"></div>
-            
-            <div  id="guests_project"></div>
+          <div class="row">
+            <div class="col-6" id="recipes">
+
+            </div>
+            <div class="col-6">
+                <div class="input-group mb-3" id="action">
+                    <div class="input-group-prepend">
+                        <button type="button" id="minus">&minus;</button>
+                    </div>
+                    <input type="number" class="form-control text-center"  disabled
+                        id="member_project" max="15" min="0">
+                    <div class="input-group-append">
+                        <button type="button" id="add">&#x2b;</button>
+                    </div>
+                </div>
+            </div>
+          </div>
         </div>
-        
+
         <div class="ruler" id="css"></div>
 
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-4 mt-4">
+
+            <div class="col-6">
                 <table class="table table-borderless" id="ingradiants_project"></table>
             </div>
-            <div class="col-4">
+            <div class="col-6">
                 <table class="table table-borderless" id="instruction_project"></table>
             </div>
-            <div class="col-2"></div>
+
         </div>
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/project.js"></script>
 </body>
