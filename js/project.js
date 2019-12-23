@@ -23,6 +23,7 @@ $("#minus").on('click', function () {
     updateRecipe(seclect,member);
 });
 
+// get url
 function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
@@ -38,6 +39,7 @@ function getApi() {
     });
 }
 
+// get recipe
 var allData = [];
 function chooseRecipe(recipe) {
     allData = recipe;
@@ -78,11 +80,11 @@ function updateRecipe(seclect,member) {
     allData.forEach(item => {
         if (item.id == seclect) {
             recipeimage(item.name,item.iconUrl);
-
-            //step
+            
+            // step
             getStep(item.instructions);
 
-            // showIngredient
+            // updateIngredient
             updateIngredient(item.ingredients,member);
             $('#action').show();
         }
@@ -91,10 +93,9 @@ function updateRecipe(seclect,member) {
 
 //recipeimage
 function recipeimage(name, image){
-
     var recipe = "";
     recipe += `
-    ${name}
+    <h5>${name}</h5>
     <img src="${image}" width = "100" class = "rounded-circle">
     `;
     $('#recipes').html(recipe);
@@ -117,6 +118,8 @@ function getStep(step) {
 // get ingrediant
 function showIngredient(ing) {
     var ingredient = "";
+    ingredient += `
+    `;
     ing.forEach(item => {
         ingredient += `
         <table class="striped">
@@ -161,7 +164,7 @@ function add(num) {
 // decrease value when click on icon minus
 function minus(num) {
     var minus = parseInt(num) - 1;
-    if (minus >= 0) {
+    if (minus >= 1) {
         $("#member_project").val(minus);
     }
 }
