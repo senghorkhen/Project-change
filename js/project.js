@@ -89,17 +89,17 @@ function updateRecipe(seclect,member) {
     });
 }
 
-//recipeimage
+// recipe image
 function recipeimage(name, image){
     var recipe = "";
     recipe += `
     <h5 class="text-center">${name}</h5>
-    <img src="${image}" width = "100" class="rounded-circle">
+    <img src="${image}" width = "100" class="rounded-circle img-thumbnail">
     `;
     $('#recipes').html(recipe);
 }
 
-//step
+// step
 function getStep(step) {
     var cutStep = step.split("<step>");
     // showScutSteptep
