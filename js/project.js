@@ -3,22 +3,21 @@ $(document).ready(function () {
     $('#recipe').on('change', function () {
         var rcipeId = $('#recipe').val();
         eachRecipe(rcipeId);
-
     });
 });
 
 // function click on icon plus
 $("#add").on('click', function () {
+    add();
     var member = $("#member_project").val();
-    add(member);
     var seclect = $('#recipe').val();
     updateRecipe(seclect,member);
 });
 
 // function click on icon minus
 $("#minus").on('click', function () {
+    minus();
     var member = $("#member_project").val();
-    minus(member);
     var seclect = $('#recipe').val();
     updateRecipe(seclect,member);
 });
@@ -54,7 +53,6 @@ $('#num').hide();
 $('#card').hide();
 
 // function for loop data from array variable
-var oldGuests;
 function eachRecipe(id) {
     allData.forEach(item => {
         if (item.id == id) {
@@ -80,7 +78,7 @@ function updateRecipe(seclect,member) {
     allData.forEach(item => {
         if (item.id == seclect) {
             recipeimage(item.name,item.iconUrl);
-            
+
             // step
             getStep(item.instructions);
 
@@ -95,8 +93,8 @@ function updateRecipe(seclect,member) {
 function recipeimage(name, image){
     var recipe = "";
     recipe += `
-    <h5>${name}</h5>
-    <img src="${image}" width = "100" class = "rounded-circle">
+    <h5 class="text-center">${name}</h5>
+    <img src="${image}" width = "100" class="rounded-circle">
     `;
     $('#recipes').html(recipe);
 }
@@ -124,7 +122,7 @@ function showIngredient(ing) {
         ingredient += `
         <table class="striped">
         <tr>
-            <td><img src="${item.iconUrl}" width="50" class ="rounded-circle"></td>
+            <td><img src="${item.iconUrl}" width="50" class ="img-fluid img-thumbnail"></td>
             <td>${item.quantity}</td>
             <td>${item.unit[0]}</td>
             <td>${item.name}</td>
@@ -135,15 +133,14 @@ function showIngredient(ing) {
     $('#ingradiants_project').html(ingredient);
     $('#card').show();
 }
-
 // updateIngredient
 function updateIngredient(ing,member) {
     var ingredient = "";
     ing.forEach(item => {
-        var update = item.quantity * parseInt(member) / oldGuests;
+        var update = item.quantity * parseInt(member) /oldGuests;
         ingredient += `
         <tr>
-            <td><img src="${item.iconUrl}" width="50" class ="rounded-circle"></td>
+            <td><img src="${item.iconUrl}" width="50" class ="img-fluid img-thumbnail"></td>
             <td>${update}</td>
             <td>${item.unit[0]}</td>
             <td>${item.name}</td>
@@ -154,16 +151,18 @@ function updateIngredient(ing,member) {
 }
 
 // increase value when click on icon add
-function add(num) {
-    var numAdd = parseInt(num) + 1;
+function add() {
+    var increas = $('#member_project').val();
+    var numAdd = parseInt(increas) + 1;
     if (numAdd <= 15) {
         $("#member_project").val(numAdd);
     }
 }
 
 // decrease value when click on icon minus
-function minus(num) {
-    var minus = parseInt(num) - 1;
+function minus() {
+    var decreas = $('#member_project').val();
+    var minus = parseInt(decreas) - 1;
     if (minus >= 1) {
         $("#member_project").val(minus);
     }
